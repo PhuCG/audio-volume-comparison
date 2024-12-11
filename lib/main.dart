@@ -22,6 +22,9 @@ class _MainAppState extends State<MainApp> {
   final audio2 =
       'https://api-dev.ahaspeak.app/speech?text=Nice%20to%20meet%20you,%20Jack.%20How%20are%20you?&style=friendly&voice=en-AU-CarlyNeural&speed=normal';
 
+  final audio3 =
+      'https://storage-dev.ahaspeak.app/scenario/00f6ce25-cb02-48be-ac25-5495428c5cfc/i_eat_dinner_and_watch_tv._i_go_to_bed_at_1000_pm._and_you.mp3';
+
   late AudioPlayer _justAudioPlayer;
   late Player _mediaKitPlayer;
 
@@ -66,6 +69,13 @@ class _MainAppState extends State<MainApp> {
                       setState(() => audio = audio2);
                     },
                     child: const Text('Play 2'),
+                  ),
+                  const SizedBox(width: 12),
+                  TextButton(
+                    onPressed: () async {
+                      setState(() => audio = audio3);
+                    },
+                    child: const Text('Play 3'),
                   ),
                 ],
               ),
