@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:media_kit/media_kit.dart';
@@ -18,16 +16,21 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  final urlAudio =
+  final audio1 =
       "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3";
-  // 'https://api-dev.ahaspeak.app/speech?text=Nice%20to%20meet%20you,%20Jack.%20How%20are%20you?&style=friendly&voice=en-AU-CarlyNeural&speed=normal';
+
+  final audio2 =
+      'https://api-dev.ahaspeak.app/speech?text=Nice%20to%20meet%20you,%20Jack.%20How%20are%20you?&style=friendly&voice=en-AU-CarlyNeural&speed=normal';
 
   late AudioPlayer _justAudioPlayer;
   late Player _mediaKitPlayer;
 
+  var audio = '';
+
   @override
   void initState() {
     super.initState();
+    audio = audio1;
     _justAudioPlayer = AudioPlayer();
     _mediaKitPlayer = Player();
   }
@@ -48,11 +51,32 @@ class _MainAppState extends State<MainApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () async {
+                      setState(() => audio = audio1);
+                    },
+                    child: const Text('Play 1'),
+                  ),
+                  const SizedBox(width: 12),
+                  TextButton(
+                    onPressed: () async {
+                      setState(() => audio = audio2);
+                    },
+                    child: const Text('Play 2'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              const Divider(),
+              const SizedBox(height: 12),
               const Text('Just Audio'),
               const SizedBox(height: 12),
               TextButton(
                 onPressed: () async {
-                  await _justAudioPlayer.setUrl(urlAudio);
+                  await _justAudioPlayer.setUrl(audio);
                   await _justAudioPlayer.play();
                 },
                 child: const Text('Play URL'),
@@ -64,7 +88,7 @@ class _MainAppState extends State<MainApp> {
               const SizedBox(height: 12),
               TextButton(
                 onPressed: () async {
-                  await _mediaKitPlayer.open(Media(urlAudio));
+                  await _mediaKitPlayer.open(Media(audio));
                 },
                 child: const Text('Play URL'),
               ),
