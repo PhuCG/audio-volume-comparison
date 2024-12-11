@@ -19,7 +19,8 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   final urlAudio =
-      'https://api-dev.ahaspeak.app/speech?text=Nice%20to%20meet%20you,%20Jack.%20How%20are%20you?&style=friendly&voice=en-AU-CarlyNeural&speed=normal';
+      "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3";
+  // 'https://api-dev.ahaspeak.app/speech?text=Nice%20to%20meet%20you,%20Jack.%20How%20are%20you?&style=friendly&voice=en-AU-CarlyNeural&speed=normal';
 
   late AudioPlayer _justAudioPlayer;
   late Player _mediaKitPlayer;
@@ -66,6 +67,14 @@ class _MainAppState extends State<MainApp> {
                   await _mediaKitPlayer.open(Media(urlAudio));
                 },
                 child: const Text('Play URL'),
+              ),
+              const Divider(),
+              TextButton(
+                onPressed: () async {
+                  await _mediaKitPlayer.stop();
+                  await _justAudioPlayer.stop();
+                },
+                child: const Text('Stop'),
               ),
             ],
           ),
